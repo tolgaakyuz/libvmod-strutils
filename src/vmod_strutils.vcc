@@ -1,0 +1,23 @@
+$Module strutils 3 "Varnish strutils Module"
+
+DESCRIPTION
+===========
+
+Utilities when working with strings in VCL
+
+Example
+    ::
+
+        import strutils;
+
+        sub vcl_deliver {
+	    	set resp.http.DecimalValue = strutils.hex_to_decimal("5e6ea416");
+        }
+
+$Function STRING hex_to_decimal(STRING)
+
+Description
+    hex_to_decimal converts hex string to decimal string
+
+SEE ALSO
+========vcl\(7),varnishd\(1)

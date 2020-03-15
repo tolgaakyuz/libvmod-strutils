@@ -1,0 +1,21 @@
+varnishtest "test vmod-strutils"
+
+server s1 {
+	rxreq
+	txresp
+} -start
+
+varnish v1 -vcl+backend {
+        import strutils;
+
+        sub vcl_deliver {
+	    set resp.http.DecimalValue = strutils.hex_to_decimal("5e6ea416");
+        }
+} -start
+
+client c1 {
+	txreq
+	rxresp
+	expect resp.status == 200
+	expect resp.http.DecimalValue == "1584309270"
+} -run
